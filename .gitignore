@@ -1,0 +1,22 @@
+# dependencies
+/node_modules
+
+# build output
+/dist
+
+# test output
+/coverage
+/playwright-report
+/test-results
+
+# env files: never commit real keys (only the example template is tracked)
+.env
+.env.*
+!.env.example
+
+# downloads cached by the data scripts
+/.cache
+
+# OS / editor / logs
+.DS_Store
+pnpm-debug.log*

@@ -1,0 +1,35 @@
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
+
+export default defineConfig([
+    globalIgnores(['dist', 'coverage', 'playwright-report', 'test-results']),
+    {
+        files: ['**/*.{ts,tsx,mts}'],
+        extends: [
+            js.configs.recommended,
+            tseslint.configs.recommended,
+            reactHooks.configs.flat.recommended,
+            reactRefresh.configs.vite,
+        ],
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: globals.browser,
+        },
+    },
+    {
+        // Node-side config and test-runner files.
+        files: ['*.config.{js,mjs,ts,mts}', 'e2e/**/*.ts', 'scripts/**/*.ts'],
+        languageOptions: {
+            globals: globals.node,
+        },
+        rules: {
+            'react-refresh/only-export-components': 'off',
+            // Not React code: Playwright fixtures take a callback named `use`.
+            'react-hooks/rules-of-hooks': 'off',
+        },
+    },
+])

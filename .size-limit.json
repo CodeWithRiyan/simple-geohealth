@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Home page (entry chunk: layout, map view, language, credits)",
+        "path": "dist/assets/index-*.js",
+        "limit": "6 kB"
+    },
+    {
+        "name": "MUI (shared chunk)",
+        "path": "dist/assets/mui-*.js",
+        "limit": "100 kB"
+    },
+    {
+        "name": "MapLibre (shared chunk)",
+        "path": "dist/assets/maplibre-*.js",
+        "limit": "260 kB"
+    },
+    {
+        "name": "Province outlines (data file)",
+        "path": "dist/data/provinces.geojson",
+        "limit": "90 kB"
+    }
+]
