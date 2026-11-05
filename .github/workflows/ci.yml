@@ -13,6 +13,9 @@ on:
 permissions:
     contents: read
 
+# Runners are pinned: ubuntu-latest moved to Ubuntu 26 in October 2026, where
+# Playwright 1.58 cannot install its browser dependencies.
+
 concurrency:
     group: ci-${{ github.ref }}
     cancel-in-progress: true
@@ -20,7 +23,7 @@ concurrency:
 jobs:
     check:
         name: Types, lint, tests, size
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         timeout-minutes: 15
         steps:
             - uses: actions/checkout@v4
@@ -38,7 +41,7 @@ jobs:
 
     e2e:
         name: End-to-end (Playwright + axe)
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         timeout-minutes: 20
         steps:
             - uses: actions/checkout@v4
@@ -59,7 +62,7 @@ jobs:
 
     secrets:
         name: Secret scan (gitleaks)
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         timeout-minutes: 5
         steps:
             - uses: actions/checkout@v4
@@ -73,7 +76,7 @@ jobs:
         name: Publish to GitHub Pages
         needs: [check, e2e, secrets]
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         timeout-minutes: 10
         permissions:
             contents: read
